@@ -12,9 +12,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 import os
 import environ
-# import cloudinary
-# import cloudinary.uploader
-# import cloudinary.api
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 from pathlib import Path
 
@@ -34,13 +34,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 env = environ.Env()
 env_file_path = BASE_DIR / '.env'
-# env_file_path = BASE_DIR.parent / '.env'
 env.read_env(env_file_path)
 
-# environ.Env.read_env(BASE_DIR / '.env')
 
 # ALLOWED_HOSTS = ["localhost", "127.0.0.1", '0.0.0.0', 'personal-assistant-sudo-team.koyeb.app']
-ALLOWED_HOSTS =[]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", '0.0.0.0']
+# ALLOWED_HOSTS =[]
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env('SECRET_KEY')
@@ -60,6 +59,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'phonenumber_field',
     'storages',
     'contacts_app',
     'files_app',
@@ -153,8 +153,8 @@ EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 # Cloudinary settings
-# cloudinary.config(cloud_name=env("CLOUDINARY_CLOUD_NAME"), api_key=env(
-#     "CLOUDINARY_API_KEY"), api_secret=env("CLOUDINARY_API_SECRET"), secure=True)
+cloudinary.config(cloud_name=env("CLOUDINARY_CLOUD_NAME"), api_key=env(
+    "CLOUDINARY_API_KEY"), api_secret=env("CLOUDINARY_API_SECRET"), secure=True)
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/

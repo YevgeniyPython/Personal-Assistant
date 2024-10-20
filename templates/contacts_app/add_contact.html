@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Додати контакт{% endblock %}
+{% block title %}Add contact{% endblock %}
 
 {% block content %}
     <div class="card contact-form-container mx-auto" style="max-width: 600px;">
         <div class="card-body">
-            <h1 class="mb-4 text-center" style="color: #E2B29B;">Додати контакт</h1>
+            <h1 class="mb-4 text-center" style="color: #E2B29B;">Add contact</h1>
 
             <form method="POST">
                 {% csrf_token %}
@@ -51,7 +51,7 @@
                     </div>
                 {% endif %}
             
-                <button type="submit" class="btn btn-primary">Зберегти</button>
+                <button type="submit" class="btn btn-primary">Save</button>
             </form>
                         
         </div>
