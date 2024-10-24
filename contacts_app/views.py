@@ -9,17 +9,17 @@ from dateutil.relativedelta import relativedelta
 from django.core.paginator import Paginator
 
 
-def contacts_home(request):
-    """
-    Головна сторінка для керування контактами.
+# def contacts_home(request):
+#     """
+#     Головна сторінка для керування контактами.
 
-    Args:
-        request (HttpRequest): Об'єкт запиту.
+#     Args:
+#         request (HttpRequest): Об'єкт запиту.
 
-    Returns:
-        HttpResponse: Сторінка для вибору дій з контактами.
-    """
-    return render(request, 'contacts_app/contact_home.html')
+#     Returns:
+#         HttpResponse: Сторінка для вибору дій з контактами.
+#     """
+#     return render(request, 'contacts_app/contact_list.html')
 
 
 @login_required
@@ -134,7 +134,7 @@ def contact_list(request):
             Q(email__icontains=query)
         )
 
-    paginator = Paginator(contacts, 3)
+    paginator = Paginator(contacts, 5)
     page_number = request.GET.get('page')
     contacts_page = paginator.get_page(page_number)
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <title>{% block title %}Документ{% endblock %}</title> -->
+    <title>{% block title %}Base{% endblock %}</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
@@ -29,10 +29,10 @@
                 </li>
                 {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'contact_home' %}" style="color: #E2B29B;">Contacts</a>
+                        <a class="nav-link" href="{% url 'contact_list' %}" style="color: #E2B29B;">Contacts</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'note_home' %}" style="color: #E2B29B;">Notes</a>
+                        <a class="nav-link" href="{% url 'note_list' %}" style="color: #E2B29B;">Notes</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'file_list' %}" style="color: #E2B29B;">Cloud storage</a>
