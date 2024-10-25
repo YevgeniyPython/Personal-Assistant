@@ -66,7 +66,7 @@
             </div>
 
             <div class="d-flex justify-content-between">
-                <button type="submit" class="btn btn-primary" style="flex: 1; margin-right: 10px; padding: 6px 12px; margin-top: 8px;">Update note</button>
+                <button type="submit" class="btn btn-primary" style="flex: 1; margin-right: 10px; padding: 6px 12px; margin-top: 8px;">Update note and Quit</button>
                 <a href="{% url 'delete_note' note.id %}" class="btn" style="flex: 1; margin-right: 10px; padding: 6px 12px; margin-top: 8px; background-color: #a40c0c;" onclick="return confirm('Are you sure you want to delete this note?');">Delete</a>
                 <a href="{% url 'note_list' %}" class="btn btn-block" style="flex: 1; background-color: #3D6657; border-color: #40886E; color: #fff; padding: 6px 12px; margin-top: 8px;">Back to list</a>
             </div>

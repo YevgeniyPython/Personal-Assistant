@@ -22,9 +22,9 @@ class ContactForm(forms.ModelForm):
         }
         labels = {
             'name': 'Name',
-            'address': 'Adress',
+            'address': 'Address',
             'phone_number': 'Phone number',
-            'email': 'E-mail',
+            'email': 'Email',
             'birthday': 'Birthday',
         }
 
