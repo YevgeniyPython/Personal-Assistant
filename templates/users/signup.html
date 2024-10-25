@@ -3,12 +3,12 @@
 {% load static %}
 {% load custom_filters %}
 
-{% block title %}Реєстрація{% endblock %}
+{% block title %}Create your account{% endblock %}
 
 {% block content %}
 <div class="card" style="background-color: #3D6657; color: #E2B29B;">
     <div class="card-header" style="background-color: #155840; color: #E2B29B;">
-        <h2 class="text-center">Реєстрація</h2>
+        <h2 class="text-center">Create your account</h2>
     </div>
     <div class="card-body">
         <form method="POST" enctype="multipart/form-data">
@@ -58,10 +58,10 @@
             </div>
             
             <div class="form-group">
-                <button type="submit" class="btn btn-primary" style="background-color: #6FBDA2; border: none;">Зареєструватися</button>
+                <button type="submit" class="btn btn-primary" style="background-color: #6FBDA2; border: none;">Sign up</button>
             </div>
             <div class="form-group text-center">
-                <p>Вже маєте акаунт? <a href="{% url 'users:login' %}" style="color: #E2B29B;">Увійти</a></p>
+                <p>Have an account? <a href="{% url 'users:login' %}" style="color: #E2B29B;">Log in now</a></p>
             </div>
         </form>
     </div>

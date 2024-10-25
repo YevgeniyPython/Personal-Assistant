@@ -3,14 +3,20 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.paginator import Paginator
 from django.db.models import Q
+from django.views.decorators.http import require_POST
+
+from django.http import JsonResponse
 from .models import Note, Tag
-from .forms import NoteForm
+from .forms import NoteForm, TagForm
 
 
-@login_required
-def note_home(request):
-    notes = Note.objects.filter(created_by=request.user)
-    return render(request, 'notes_app/note_home.html', {'notes': notes})
+
+
+
+# @login_required
+# def note_home(request):
+#     notes = Note.objects.filter(created_by=request.user)
+#     return render(request, 'notes_app/note_home.html', {'notes': notes})
 
 
 @login_required
@@ -73,7 +79,7 @@ def note_list(request):
 @login_required
 def edit_note(request, note_id):
     note = get_object_or_404(Note, id=note_id, created_by=request.user)
-
+    note_tags = note.tags.all()
     if request.method == "POST":
         form = NoteForm(request.POST, instance=note)
         if form.is_valid():
@@ -82,6 +88,7 @@ def edit_note(request, note_id):
             note.save()
 
             note.tags.clear()
+            
             tag_ids = request.POST.getlist('tags')
             for tag_id in tag_ids:
                 if tag_id:
@@ -108,13 +115,7 @@ def edit_note(request, note_id):
 
     user_tags = Tag.objects.filter(created_by=request.user)
 
-    return render(request, 'notes_app/edit_note.html', {'form': form, 'note': note, 'tags': user_tags})
-
-
-
-
-
-
+    return render(request, 'notes_app/edit_note.html', {'form': form, 'note': note, 'tags': user_tags, 'note_tags': note_tags})
 
 
 @login_required
@@ -151,7 +152,40 @@ def add_tag(request):
                 defaults={'created_by': request.user}
             )
             if created:
-                messages.success(request, 'Тег успішно додано!')
+                messages.success(request, 'Tag added successfully!')
             else:
-                messages.warning(request, 'Тег вже існує!')
+                messages.warning(request, 'Tag already exists!')
     return redirect(request.META.get('HTTP_REFERER', 'add_note'))
+
+@login_required
+def tag_list(request):
+    tags = Tag.objects.filter(created_by=request.user).order_by('name')
+
+    paginator = Paginator(tags, 5)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'notes_app/tag_list.html', {'page_obj': page_obj})
+
+    # return render (request, 'notes_app/tag_list.html', {'tags': tags})
+
+
+# @login_required
+# @require_POST
+# def add_tag(request):
+#     form = TagForm(request.POST)
+#     if form.is_valid():
+#         tag = form.save(commit=False)
+#         tag.created_by = request.user
+#         tag.save()
+#     if tag:
+#         JsonResponse({'success': True, 'tag': tag.name})
+#     else:
+#         JsonResponse({'success': False, 'errors': form.errors})
+#     return redirect(request.META.get('HTTP_REFERER', 'add_note'))
+
+@login_required
+def delete_tag(request, tag_id):
+    tag = get_object_or_404(Tag, id=tag_id, created_by=request.user)
+    tag.delete()
+    return redirect('tag_list')

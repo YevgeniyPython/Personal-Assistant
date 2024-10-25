@@ -7,15 +7,15 @@ class NoteForm(forms.ModelForm):
         queryset=Tag.objects.all(),
         required=False,
         widget=forms.CheckboxSelectMultiple,
-        label='Теги'
+        label='Tags'
     )
 
     class Meta:
         model = Note
         fields = ['title', 'content', 'tags']
         labels = {
-            'title': 'Заголовок',
-            'content': 'Опис',
+            'title': 'Title',
+            'content': 'Description',
         }
 
     def __init__(self, *args, **kwargs):
@@ -24,3 +24,12 @@ class NoteForm(forms.ModelForm):
         if user is not None:
 
             self.fields['tags'].queryset = Tag.objects.filter(created_by=user)
+
+
+class TagForm(forms.ModelForm):
+    class Meta:
+        model = Tag
+        fields = ['name']
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control', 'id': 'tagNameInput'})
+        }

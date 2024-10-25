@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 
-{% block title %}Створити нотатку{% endblock %}
+{% block title %}Create note{% endblock %}
 
 {% load notes_custom_filters %}
 {% block content %}
 <div class="card contact-form-container mt-4 shadow">
-    <div class="card-header" style="background-color: #155840; color: #E2B29B;">
-        <h1 class="m-2">Створити нотатку</h1>
-    </div>
+
+    <h1 class="m-2">Create note</h1>
+
 
     <div class="card-body">
         {% if messages %}
@@ -34,7 +34,7 @@
         
             <div class="form-group">
                 <label for="id_tags" class="d-flex align-items-center">
-                    Теги:
+                    Tags:
                     <div id="selected-tags" class="d-flex flex-wrap ms-2"></div> 
                 </label>
                 <div class="d-flex flex-wrap" id="tag-container">
@@ -50,13 +50,15 @@
             </div>
 
             <div class="form-group">
-                <label for="newTagName">Новий тег:</label>
-                <input type="text" id="newTagName" class="form-control mt-2" placeholder="Введіть ім'я нового тегу">
-                <button type="button" class="btn btn-primary mt-2" id="createTagButton">Створити тег</button>
+                <label for="newTagName">Add new tag:</label>
+                <input type="text" id="newTagName" class="form-control mt-2" placeholder="Enter new tag's name">
+                <button type="button" class="btn btn-primary mt-2" id="createTagButton">Create</button>
             </div>
         
-            <button type="submit" class="btn btn-success mt-3">Додати нотатку</button>
-            <a href="{% url 'note_list' %}" class="btn btn-info mt-3">Назад до списку</a>
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-primary" style="flex: 1; background-color: #097812; margin-right: 10px; padding: 6px 12px; margin-top: 8px;">Save note</button>
+                <a href="{% url 'note_list' %}" class="btn btn-block" style="flex: 1; background-color: #3D6657; border-color: #40886E; color: #fff; padding: 6px 12px; margin-top: 8px;">Back to list</a>
+            </div>
         </form>
 
         <form method="POST" action="{% url 'add_tag' %}" id="addTagForm" style="display:none;">

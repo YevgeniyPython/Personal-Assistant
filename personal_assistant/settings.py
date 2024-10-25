@@ -28,27 +28,27 @@ from django.contrib.messages import constants as messages
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 env = environ.Env()
 env_file_path = BASE_DIR / '.env'
-env_file_path = BASE_DIR.parent / '.env'
 env.read_env(env_file_path)
 
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", '0.0.0.0', 'personal-assistant-sudo-team.koyeb.app']
-
+# ALLOWED_HOSTS = ["localhost", "127.0.0.1", '0.0.0.0', 'personal-assistant-sudo-team.koyeb.app']
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", '0.0.0.0']
+# ALLOWED_HOSTS =[]
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env('SECRET_KEY')
 
-CSRF_TRUSTED_ORIGINS = [
-    'https://localhost',
-    'http://127.0.0.1:8000',
-    'https://personal-assistant-sudo-team.koyeb'
-]
+# CSRF_TRUSTED_ORIGINS = [
+#     'https://localhost',
+#     'http://127.0.0.1:8000',
+#     'https://personal-assistant-sudo-team.koyeb'
+# ]
 
 # Application definition
 
@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'phonenumber_field',
     'storages',
     'contacts_app',
     'files_app',
@@ -103,14 +104,22 @@ WSGI_APPLICATION = 'personal_assistant.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': env('KOYEB_DB_NAME'),
+    #     'USER': env('KOYEB_DB_USER'),
+    #     'PASSWORD': env('KOYEB_DB_PASSWORD'),
+    #     'HOST': env('KOYEB_DB_HOST'),
+    #     'PORT': env('KOYEB_DB_PORT'),
+    #     'OPTIONS': {'sslmode': 'require'},
+    # },
+        'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env('KOYEB_DB_NAME'),
-        'USER': env('KOYEB_DB_USER'),
-        'PASSWORD': env('KOYEB_DB_PASSWORD'),
-        'HOST': env('KOYEB_DB_HOST'),
-        'PORT': env('KOYEB_DB_PORT'),
-        'OPTIONS': {'sslmode': 'require'},
+        'NAME': env('DB_NAME'),
+        'USER': env('DB_USER'),
+        'PASSWORD': env('DB_PASSWORD'),
+        'HOST': env('DB_HOST'),
+        'PORT': env('DB_PORT'),
     }
 }
 
@@ -150,9 +159,9 @@ cloudinary.config(cloud_name=env("CLOUDINARY_CLOUD_NAME"), api_key=env(
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
-LANGUAGE_CODE = 'uk'
+LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Europe/Kiev'
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
@@ -165,21 +174,21 @@ USE_TZ = True
 STATIC_URL = "static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+# STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
+MEDIA_URL = '/media/'
 # Настройки AWS
-AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME')
-AWS_S3_REGION_NAME = 'eu-north-1'
-AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.{AWS_S3_REGION_NAME}.amazonaws.com'
+# AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
+# AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
+# AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME')
+# AWS_S3_REGION_NAME = 'eu-north-1'
+# AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.{AWS_S3_REGION_NAME}.amazonaws.com'
 
-MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/'
+# MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/'
 
-DEFAULT_FILE_STORAGE = 'storages.backends.s3.S3Boto3'
-STATICFILES_STORAGE = 'storages.backends.s3.S3Boto3'
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3.S3Boto3'
+# STATICFILES_STORAGE = 'storages.backends.s3.S3Boto3'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

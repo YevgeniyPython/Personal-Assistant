@@ -1,24 +1,24 @@
 {% extends 'base.html' %}
 
-{% block title %}Деталі контакту{% endblock %}
+{% block title %}Contact Details{% endblock %}
 {% load static %}
 {% block content %}
 <div class="card contact-form-container mx-auto">
     <h1 class="mb-4">{{ contact.name }}</h1>
-    <p><strong>Адреса:</strong> {{ contact.address }}</p>
-    <p><strong>Телефон:</strong> {{ contact.phone_number }}</p>
-    <p><strong>Email:</strong> {{ contact.email }}</p>
-    <p><strong>День народження:</strong> {{ contact.birthday }}</p>
-    <p><strong>Днів до дня народження:</strong> {{ contact.days_until_birthday }}</p>
+    <p><strong>Adress:</strong> {{ contact.address }}</p>
+    <p><strong>Phone number:</strong> {{ contact.phone_number }}</p>
+    <p><strong>E-mail:</strong> {{ contact.email }}</p>
+    <p><strong>Birthday:</strong> {{ contact.birthday }}</p>
+    <p><strong>Left until birthday:</strong> {{ contact.days_until_birthday }} days</p>
 
-    <a href="{% url 'edit_contact' contact.id %}" class="btn btn-primary" style="margin-bottom: 2ex;">Редагувати</a>
-    <a href="{% url 'delete_contact' contact.id %}" class="btn btn-danger" style="margin-bottom: 2ex;" onclick="return confirmDelete()">Видалити</a>
-    <a href="{% url 'contact_list' %}" class="btn btn-secondary">До списку</a>
+    <a href="{% url 'edit_contact' contact.id %}" class="btn btn-primary" style="margin-bottom: 2ex;">Edit 🖊</a>
+    <a href="{% url 'delete_contact' contact.id %}" class="btn btn-danger" style="margin-bottom: 2ex;" onclick="return confirmDelete()">Delete 🗑</a>
+    <a href="{% url 'contact_list' %}" class="btn btn-secondary">To contact list 📄</a>
 </div>
 
 <script>
     function confirmDelete() {
-        return confirm("Вы уверены, что хотите удалить этот контакт?");
+        return confirm("Are you sure you want to delete contact {{ contact.name }}?");
     }
 </script>
 {% endblock %}

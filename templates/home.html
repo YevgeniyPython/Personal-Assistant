@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 
-{% block title %}Ваш помічник{% endblock %}
+{% block title %}Your personal Assistant{% endblock %}
 
 {% block content %}
 <div class="container" style="padding-top: 20px;">
-    <div class="row">
+    <!-- <div class="row">
         <div class="col-12 text-end" style="position: relative;">
             <div class="position-absolute" style="right: 0; top: 0; z-index: 1000; color: #E2B29B;">
                 <strong>Курси валют:</strong> 
@@ -17,9 +17,9 @@
                 {% endif %}
             </div>
         </div>
-    </div>
+    </div> -->
 
-    <h1 style="color: #81BDA8;">Новини</h1>
+    <h1 style="color: #81BDA8;">HOT NEWS</h1>
 
     {% for category, articles in news_by_category.items %}
         <h2 style="color: #6FBDA2; border-bottom: 2px solid #E2B29B; padding-bottom: 5px; margin-bottom: 10px;">
@@ -30,15 +30,15 @@
                 <div class="list-group-item" style="position: relative; padding-bottom: 40px; border: 2px solid rgba(0, 0, 0, 0.199);">
                     <h5 class="mb-1" style="color: #E2B29B;">{{ article.title }}</h5>
                     <p class="mb-1">{{ article.description }}</p>
-                    <small class="text-muted">Автор: {{ article.author }} | Дата: {{ article.published_at }}</small>
-                    <a href="{{ article.url }}" class="btn btn-outline-primary mt-2" style="display: block; margin-top: 10px; background-color: transparent !important; border: 2px solid #E2B29B !important; color: #E2B29B !important; text-decoration: none !important;">Читати далі</a>
+                    <small class="text-muted">Author: {{ article.author }} | Date: {{ article.published_at }}</small>
+                    <a href="{{ article.url }}" class="btn btn-outline-primary mt-2" style="display: block; margin-top: 10px; background-color: transparent !important; border: 2px solid #E2B29B !important; color: #E2B29B !important; text-decoration: none !important;">Read more</a>
                 </div>
             {% empty %}
-                <p>Відсутні доступні новини за цією категорією.</p>
+                <p>There are no available news for this category.</p>
             {% endfor %}
         </div>
     {% empty %}
-        <p>Відсутні доступні новини.</p>
+        <p>No news available.</p>
     {% endfor %}
 
     <style>

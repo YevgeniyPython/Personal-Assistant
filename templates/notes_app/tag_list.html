@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+
+{% block title %}Note list{% endblock %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/notes_list.css' %}">
+
+{% block content %}
+
+<div class="card" style="background-color: #40886E; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);">
+    <h2 class="mb-4 text-center card" style="color: #E2B29B;">Tags</h1>
+    {% if messages %}
+    <div class="container mt-3">
+        {% for message in messages %}
+            <div id="success-message" class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    <!-- Кнопка для вызова модального окна -->
+    <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tagModal">
+    Add Tag
+    </button> -->
+    
+    <!-- Модальное окно -->
+    <!-- <div class="modal fade" id="tagModal" tabindex="-1" aria-labelledby="tagModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="tagModalLabel">Add New Tag</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <form id="tagForm">
+                {% csrf_token %}
+                <div class="mb-3">
+                <label for="tagName" class="form-label">Tag Name</label>
+                <input type="text" class="form-control" id="tagName" name="tagName" required>
+                </div>
+                <div id="tagFormError" class="alert alert-danger d-none"></div>
+            </form>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="saveTagBtn">Save Tag</button>
+            </div>
+        </div>
+        </div>
+    </div> -->
+  
+    <!-- <a href="{% url 'add_tag' %}" class="btn btn-search mt-2" style="width: 100%; margin-bottom: 10px">Add new tag</a> -->
+    <div>
+        <label for="newTagName">Add new tag:</label>
+        <input type="text" id="newTagName" class="form-control" placeholder="Enter new tag's name">
+        <button class="btn-primary btn-block" id="createTagButton">Create</button>
+    </div>
+    <div>
+    <ul class="list-group list-group-flush" style="margin-top: 10px; border-radius: 5px;">
+        {% for tag in page_obj %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <a class="text">{{ tag.name }}</a>
+                <a href="{% url 'delete_tag' tag.id %}" class="btn btn-danger btn-sm btn-danger-custom" onclick="return confirm('Are you sure you want to delete this tag?');">Delete 🗑</a>
+            </li>
+            
+        {% empty %}
+            <li class="list-group-item" style="background-color: #3D6657; color: #E2B29B;">No tags.</li>
+        {% endfor %}
+    </div>
+
+    <form method="POST" action="{% url 'add_tag' %}" id="addTagForm" style="display:none;">
+        {% csrf_token %}
+        <input type="hidden" name="name" id="hiddenTagName">
+    </form>
+
+    {% if page_obj.paginator.num_pages > 1 %}
+    <div class="pagination mt-2">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; First</a>
+                <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">Next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+    {% endif %}
+</div>
+
+<script>
+
+    function confirmDelete() {
+        return confirm("Are you sure you want to delete this tag?");
+    };
+
+    document.getElementById('createTagButton').addEventListener('click', function(event) {
+        event.preventDefault();
+        const newTagName = document.getElementById('newTagName').value.trim();
+        if (newTagName) {
+            const addTagForm = document.getElementById('addTagForm');
+            if (addTagForm) {
+                document.getElementById('hiddenTagName').value = newTagName;
+                addTagForm.submit();
+            } else {
+                console.error('Form addTagForm not found.');
+            }
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var successMessage = document.getElementById('success-message');
+        if (successMessage) {
+            setTimeout(function() {
+                successMessage.style.display = 'none';
+            }, 3000);
+        }
+    });
+</script>
+{% endblock %}

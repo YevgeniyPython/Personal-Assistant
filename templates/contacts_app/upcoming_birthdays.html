@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Найближчі дні народження{% endblock %}
+{% block title %}Upcoming birthdays{% endblock %}
 
 {% block content %}
 <style>
@@ -12,21 +12,24 @@
 </style>
 
 <div class="card contact-form-container">
-    <h1 class="mb-4">Найближчі дні народження</h1>
+    <h1 class="mb-4">Upcoming birthdays</h1>
 
     <form method="GET" class="mb-4">
         {{ form.period.label_tag }}
         {{ form.period }}
-        <button type="submit" class="btn btn-primary">Фільтр</button>
-    </form>
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-primary" style="flex: 1; margin-right: 10px; padding: 6px 12px; margin-top: 8px;">Filter</button>
+            <a href="{% url 'contact_list' %}" class="btn btn-block" style="flex: 1; background-color: #3D6657; border-color: #40886E; color: #fff; padding: 6px 12px; margin-top: 8px;">Go back</a>
+        </div>
+        </form>
 
     <ul class="list-group">
         {% for contact in upcoming_birthdays %}
             <li class="list-group-item">
-                {{ contact.name }} - {{ contact.birthday }} ({{ contact.days_until_birthday }} днів до дня народження)
+                {{ contact.name }} - {{ contact.birthday }} ({{ contact.days_until_birthday }} days until the birthday)
             </li>
         {% empty %}
-            <li class="list-group-item">Відсутні дні народження в найближчий час.</li>
+            <li class="list-group-item">There are no upcoming birthdays</li>
         {% endfor %}
     </ul>
 </div>
