@@ -1,6 +1,6 @@
 # Personal-Assistant
 
-## Опис
+## Description
 
 This project is a Django-based web application that implements functionality for managing personal data, including contacts, notes, and users. The application allows user registration, profile management and integration with APIs for data exchange. Key features include:
 
@@ -9,7 +9,7 @@ This project is a Django-based web application that implements functionality for
 - Ability to reset the password.
 - API integration for receiving news and exchange rate.
 
-## Вимоги
+## Requirements
 
 The project runs on Python 3.10 or higher and uses the following libraries:
 
@@ -28,39 +28,41 @@ The project runs on Python 3.10 or higher and uses the following libraries:
 Copy the project to your local computer:
 ```bash
 git clone https://github.com/A-Lastovets/Personal-Assistant.git
-
+``` 
 Go to the root folder
 
-1 Create a virtual environment:
+### 2. Create a virtual environment:
 
 python -m venv venv
 source venv/bin/activate # For Linux/Mac
 venv\Scripts\activate # For Windows
 
-2 Install the dependencies:
+### 3. Install the dependencies:
 
 pip install -r requirements.txt
 
-3 Configure the .env file: Create an .env file in the root directory of the project and add the necessary environment variables using the sample file .env.sample
+### **4. Configure the .env file:**
+Create an .env file in the root directory of the project and add the necessary environment variables using the sample file .env.sample
 
-4 Perform database migrations:
-
+### 5. Perform database migrations:
+```
 python manage.py migrate
-
-5 Start the server:
+```
+### 6. Start the server:
+```
 python manage.py runserver
-
-Using
+```
+### Using
 
 Once the server is up and running, you can open the web application in your browser at http://127.0.0.1:8000/. You will be able to register, log in, add contacts and notes, and manage your profile.
 
-Testing
+### Testing
 
 To run the tests, use the command:
-
+```
 python manage.py test
-
-License
+```
+### License
 This project is licensed under the MIT License.
 
 Thank you for using our web application!
