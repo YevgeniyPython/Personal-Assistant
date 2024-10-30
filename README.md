@@ -1,66 +1,68 @@
 # Personal-Assistant
 
-## Опис
+## Description
 
-Цей проект є веб-застосунком на базі Django, що реалізує функціональність для управління особистими даними, включаючи контакти, нотатки та користувачів. Застосунок дозволяє реєстрацію користувачів, управління профілями та інтеграцію з API для обміну даними. Основні функції включають:
+This project is a Django-based web application that implements functionality for managing personal data, including contacts, notes, files storage. The application allows user registration, profile management and integration with APIs for data exchange. Key features include:
 
-- Реєстрація та аутентифікація користувачів.
-- Завантаження та управління аватарами користувачів.
-- Можливість скидання пароля.
-- Інтеграція з API для отримання новин та курсу валют.
+- User registration and authentication.
+- Ability to reset the password.
+- API integration for receiving news and exchange rate.
+- An authorized user has access to their contact list and notes, has the ability to manage the contact list (create, search, edit, delete, view upcoming birthdays). In notes, can add tags, make a selection by tags. Also user can upload and manage their files.
 
-## Вимоги
+## Requirements
 
-Проект працює на Python 3.10 або вище та використовує наступні бібліотеки:
+The project runs on Python 3.10 or higher and uses the following libraries:
 
 - **Django**: 5.1.1
-- **psycopg2**: для роботи з PostgreSQL
-- **django-cors-headers**: для обробки CORS запитів
-- **django-crispy-forms**: для покращення вигляду форм
-- **cloudinary**: для зберігання зображень
-- **whitenoise**: для обслуговування статичних файлів
-- Інші бібліотеки, зазначені в `requirements.txt`.
+- **psycopg2**: for working with PostgreSQL
+- **django-cors-headers**: to handle CORS requests
+- **django-crispy-forms**: to improve the appearance of forms
+- **cloudinary**: for image storage
+- **whitenoise**: for serving static files
+- Other libraries specified in `requirements.txt`.
 
-## Установка
+## Installation
 
-### 1. Клонуйте репозиторій
+### 1. Clone the repository
 
-Скопіюйте проект на свій локальний комп'ютер:
+Copy the project to your local computer:
 ```bash
 git clone https://github.com/A-Lastovets/Personal-Assistant.git
+``` 
+Go to the root folder
 
-Перейдіть в кореневу папку
-
-1 Створіть віртуальне середовище:
+### 2. Create a virtual environment:
 
 python -m venv venv
-source venv/bin/activate  # Для Linux/Mac
-venv\Scripts\activate     # Для Windows
+source venv/bin/activate # For Linux/Mac
+venv\Scripts\activate # For Windows
 
-2 Встановіть залежності:
+### 3. Install the dependencies:
 
 pip install -r requirements.txt
 
-3 Налаштуйте файл .env: Створіть файл .env у кореневій директорії проекту та додайте необхідні змінні середовища використовуючі файл зразок .env.sample
+### **4. Configure the .env file:**
+Create an .env file in the root directory of the project and add the necessary environment variables using the sample file .env.sample
 
-4 Виконайте міграції бази даних:
-
+### 5. Perform database migrations:
+```
 python manage.py migrate
-
-5 Запустіть сервер:
+```
+### 6. Start the server:
+```
 python manage.py runserver
+```
+### Using
 
-Використання
+Once the server is up and running, you can open the web application in your browser at http://127.0.0.1:8000/. You will be able to register, log in, add contacts and notes, and manage your profile.
 
-Після запуску сервера ви зможете відкрити веб-застосунок у браузері за адресою http://127.0.0.1:8000/. Ви зможете реєструватися, входити в систему, додавати контакти та нотатки, а також управляти своїм профілем.
+### Testing
 
-Тестування
-
-Для запуску тестів використовуйте команду:
-
+To run the tests, use the command:
+```
 python manage.py test
+```
+### License
+This project is licensed under the MIT License.
 
-Ліцензія
-Цей проект ліцензовано під MIT License.
-
-Дякуємо за використання нашого веб-застосунку!
+Thank you for using our web application!
