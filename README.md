@@ -2,7 +2,7 @@
 
 ## Description
 
-This project is a Django-based web application that implements functionality for managing personal data, including contacts, notes, files storage. The application allows user registration, profile management and integration with APIs for data exchange. Key features include:
+This project is a Django-based web application that implements functionality for managing personal data, including contacts, notes, files storage. The application allows user registration, profile management and integration with APIs for news. Key features include:
 
 - User registration and authentication.
 - Ability to reset the password.
